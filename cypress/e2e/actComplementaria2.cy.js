@@ -1,4 +1,5 @@
-//refactorizar el codigo para tomar el value del input #user despues de haber escrito el usuario invoke('val')
+// https://codeshare.io/r49KXK
+// refactorizar el codigo para tomar el value del input #user despues de haber escrito el usuario invoke('val')
 // Asignar el valor a un alias using as
 it('Deberia validar que el usuario ingresado se encuentra en el header', () => {
     cy.visit('https://pushing-it.vercel.app/')

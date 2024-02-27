@@ -1,4 +1,7 @@
 {
+  "scripts": {
+    "test": "npx cypress open --e2e -b electron"
+  },
   "devDependencies": {
     "cypress": "^13.6.6"
   }
