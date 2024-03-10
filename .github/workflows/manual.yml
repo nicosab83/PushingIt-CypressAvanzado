@@ -1,0 +1,22 @@
+name: 'Manual'
+on:
+  workflow_dispatch:
+    inputs:
+      module:
+        description: 'module folder'
+        default: "**"
+        required: true
+      scenario:
+        description: 'scenario to execute'
+        default: "**"
+        required: true
+jobs:
+  run-cypress:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+      - name: Cypress run
+        uses: cypress-io/github-action@v5
+        with:
+          command: npx cypress run --spec cypress/e2e/${{inputs.module}}/${{inputs.scenario}}/spec.cy.js --browser chrome
