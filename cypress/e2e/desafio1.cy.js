@@ -1,58 +1,43 @@
-
-
-/*
-Ingresar en Pushing IT
-Dirigirse a Online Shop
-Agregar un producto nuevo
-Buscar el producto por su ID en el search
-Eliminar el producto
-Volver a buscar el producto
-Verificar que el producto no exista
-*/
-
-
 // Shows commands
 ///<reference types="Cypress"/>
 
-const directorioName = __dirname.replaceAll('\\','/');
+import { NewProductPage } from "../support/page/newProductPage";
+import { ProductSearchResultPage } from "../support/page/productSearchResultPage";
 
-const module = directorioName.split(/[/]/)[2]
-const scenarioName = directorioName.slice(directorioName.lastIndexOf('/') + 1).split('-').slice(0,-1).join('-')
-const testCaseId = directorioName.split(/[-]/).pop();
+describe('Cypress Avanzado - Desafío 1', () => {
 
-describe(`${scenarioName} - ${module} `, () => {
+    const newProductPage = new NewProductPage();
+    const productSearchResultPage = new ProductSearchResultPage();
+    const fixturePath = 'desafio1data.json';
 
-  beforeEach(()=>{
-    
-    cy.visit("https://pushing-it.vercel.app/")
-    cy.get('[data-cy="registertoggle"]').should("exist").dblclick()
-    cy.get('[data-cy="user"]').should('be.visible').type("pushingit")
-    cy.get('[data-cy="pass"]').should('be.visible').type('123456!')
-    cy.get('[data-cy="submitForm"]').should('be.visible').click()    
-})
+    before(() => {
+        cy.fixture(fixturePath).as('data');
+    })
 
-  it('onlie-shop-test', () => {               
-      cy.get('.css-lbapbk > :nth-child(5)').should('exist').click()
-      cy.get('[data-cy="add-product"]').should('exist').click()      
-      cy.get('[data-cy="productName"]').type('pantalon')
-      cy.get('[data-cy="productPrice"]').type('2500')
-      cy.get('[data-cy="productCard"]').type("https://acdn.mitiendanube.com/stores/001/220/451/products/12-cuotas-sin-interes-y-envio-gratis-a-todo-el-pais-511-2a1a6071a0a7ef253d16292554355786-240-0.png")
-      cy.get('[data-cy="productID"]').type('501')
-      cy.get('[data-cy="createProduct"]').click()        
-      //cy.get('#closeModal').should('be.visible').click()
-      //cy.get('.css-lbapbk > :nth-child(5)').should('exist').click()
-      cy.get('[data-cy="search-type"]').select('ID')
-      cy.get('[data-cy="search-bar"]').type('501{enter}' )
-      cy.get('.css-k31g74').contains('pantalon')
-      cy.get('[data-cy="delete-501"]').click()
-      cy.get('#saveEdit').should('be.visible').click()          
-      cy.get('#closeModal').should('be.visible').click()
-      //cy.get('.css-lbapbk > :nth-child(5)').should('exist').click()
-      cy.get('[data-cy="search-type"]').select('ID')
-      cy.get('[data-cy="search-bar"]').type('501{enter}' )
-      cy.contains('pantalon').should('not.exist')
+    beforeEach(() => {
+        cy.log("Ingresar en Pushing IT");
+        cy.login(Cypress.env().usuario, Cypress.env().password);
+        cy.visit("");
+        cy.log("Dirigirse a Online Shop");
+        cy.getByDataCy('onlineshoplink').should('exist').click();
+    })
 
-    })   
-      
+    it('TEST CASE 1: Agregar producto, buscarlo, eliminarlo y verificar que no exista el producto.', () => {
+        cy.then(function () {
+            cy.eliminarProducto(this.data.product.id);
+            cy.log("Agregar un producto nuevo");
+            cy.getByDataCy(productSearchResultPage.addProductBtn).should('exist').click();
+            newProductPage.newProductFillForm(this.data.product.name, this.data.product.price, this.data.product.img, this.data.product.id);
+            cy.log("Buscar el producto por su ID en el search");
+            productSearchResultPage.searchProductById(this.data.product.id);
+            cy.getByDataCy(productSearchResultPage.productName).contains(this.data.product.name);            
+            cy.log("Eliminar el producto");
+            productSearchResultPage.deleteProduct(this.data.product.id);
+            cy.log("Volver a buscar el producto");
+            productSearchResultPage.searchProductById(this.data.product.id);
+            cy.log("Verificar que el producto no exista");
+            cy.getByDataCy(productSearchResultPage.productName).contains(this.data.product.name).should('not.exist');
+        })
+    })
 
 });

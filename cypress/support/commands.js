@@ -45,3 +45,20 @@ Cypress.Commands.add('login', (usuario, password) => {
 Cypress.Commands.add('getByDataCy', (selector) => {
     return cy.get(`[data-cy=${selector}]`)
 })
+
+Cypress.Commands.add('getFixturePath', (filePathStr) => {
+    return filePathStr.replace(/\.[^.]+$/, "").replace(/\.[^.]+$/, "data");
+})
+
+Cypress.Commands.add('getTimeStringAsCreditCard', () => {
+        let fecha = new Date();
+        let anio = fecha.getFullYear();
+        let mes = ('0' + (fecha.getMonth() + 1)).slice(-2);
+        let dia = ('0' + fecha.getDate()).slice(-2);
+        let horas = ('0' + fecha.getHours()).slice(-2);
+        let minutos = ('0' + fecha.getMinutes()).slice(-2);
+        let segundos = ('0' + fecha.getSeconds()).slice(-2);
+        return `${anio}${mes}${dia}${horas}${minutos}${segundos}00`
+})
+
+

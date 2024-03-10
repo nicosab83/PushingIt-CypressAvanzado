@@ -1,0 +1,13 @@
+{
+    "productIn": {
+        "name": "Gorra Libertaria VLLC",
+        "price": 999.99,
+        "img": "https://ae01.alicdn.com/kf/Sddece01aa2d840409d733779059850b4N/Gadsden-flag-Don-t-tread-on-me-Libertarian-2-modificaci-n-2A-bandera-amarilla-HD-gorra.jpg",
+        "id": 999
+    },
+    "productOut": {
+        "name": "Gorra Libertaria VLLC (Modificado)",
+        "price": 456.78,
+        "img": "https://image.spreadshirtmedia.net/image-server/v1/products/T1040A14PA2641PT32X1Y9D179631036W12331H3386/views/1,width=378,height=378,appearanceId=14,backgroundColor=F2F2F2,modelId=1753,crop=list/bitcoin-libertario.jpg"
+    }
+}
