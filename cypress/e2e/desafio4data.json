@@ -1,0 +1,23 @@
+{
+    "product1": {
+        "name": "Camiseta seleccion argentina de futbol 3 estrellas titular",
+        "price": 1000.11,
+        "img": "https://acdn.mitiendanube.com/stores/001/312/744/products/dwafesgrawestryt1-d908f05bdfc1f0f79316760753329752-640-0.png",
+        "id": 20241
+    },
+    "product1Quantity": 3,
+    "product2": {
+        "name": "Camiseta seleccion argentina de futbol 3 estrellas suplente",
+        "price": 2000.22,
+        "img": "https://mezzalacamisetas.com.ar/wp-content/uploads/2023/02/af-600x701.png",
+        "id": 20242
+    },
+    "product2Quantity": 2,
+    "totalPrice": "7000.77",
+    "checkout": {
+        "firstName": "Nico", 
+        "lastName": "S",
+        "cardNumber": "1122334455667788"
+    }
+
+}

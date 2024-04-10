@@ -26,6 +26,7 @@
 
 import './requests/product'
 
+
 Cypress.Commands.add('login', (usuario, password) => {
     cy.request({
         method: "POST",
@@ -39,6 +40,27 @@ Cypress.Commands.add('login', (usuario, password) => {
         window.localStorage.setItem('user', respuesta.body.user.username);
         window.localStorage.setItem('userId', respuesta.body.user._id);
         Cypress.env().token = respuesta.body.token;
+    });
+});
+
+
+Cypress.Commands.add('loginStore', (usuario, password) => {
+    cy.session('loginWithSession', () => {
+        cy.request({
+            method: "POST",
+            url: `${Cypress.env().baseUrlAPI}/login`,
+            body: {
+                username: usuario,
+                password: password
+            },
+        }).then(respuesta => {
+            window.localStorage.setItem('token', respuesta.body.token);
+            window.localStorage.setItem('user', respuesta.body.user.username);
+            window.localStorage.setItem('userId', respuesta.body.user._id);
+            Cypress.env().token = respuesta.body.token;
+        });
+    }, {
+        cacheAcrossSpecs: true
     });
 });
 
@@ -61,4 +83,11 @@ Cypress.Commands.add('getTimeStringAsCreditCard', () => {
         return `${anio}${mes}${dia}${horas}${minutos}${segundos}00`
 })
 
-
+Cypress.Commands.add('verifyDataElementIterateDataCy', (data, elemento) => {
+    cy.get(elemento).within(() => {
+        Cypress._.forEach(data, (value, elemento) => {
+            //cy.get(`[id='${selector}']`).should('include.text', value);
+            cy.getByDataCy(elemento).should('include.text', value);
+        });
+    });
+});

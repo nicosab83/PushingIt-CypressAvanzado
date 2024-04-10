@@ -1,6 +1,7 @@
-export class ProductSearchResultPage {
+export class OnlineShopPage {
 
     constructor() {
+        this.url = 'https://pushing-it.vercel.app/home/onlineshop'
         this.addProductBtn = 'add-product';
         this.searchByList = 'search-type';
         this.searchInput = 'search-bar';
@@ -9,38 +10,41 @@ export class ProductSearchResultPage {
         this.productDeleteButton = 'delete-';
         this.productAddToCartButton = 'add-to-cart-';
         this.goShoppingCartButton = 'goShoppingCart';
-        this.goCheckoutButton = 'goCheckout';
+        //this.goCheckoutButton = 'goCheckout';
+        //this.goBillingSummaryButton = 'goBillingSummary';
+        //this.showTotalPriceButtonText = 'Show total price';
     }
 
-    searchProductById(id){
+    searchProductById(id) {
         cy.getByDataCy(this.searchByList).select('ID');
         cy.getByDataCy(this.searchInput).clear();
         cy.getByDataCy(this.searchInput).type(`${id}{enter}`);
     }
 
-    addProductToCart(id){
+    addProductToCart(id) {
         cy.getByDataCy(`${this.productAddToCartButton}${id}`).click();
         cy.getByDataCy('closeModal').should('be.visible').click();
     }
 
-    searchAndAddProductToCart(id){
+    searchAndAddProductToCart(id) {
         this.searchProductById(id);
         this.addProductToCart(id);
     }
 
-    deleteProduct(id){
+    deleteProduct(id) {
         cy.getByDataCy(`${this.productDeleteButton}${id}`).click();
         cy.get('#saveEdit').should('be.visible').click();
         cy.getByDataCy('closeModal').should('be.visible').click();
     }
 
-
-    searchAndAddProductToCart(id){
+    searchAndAddProductToCart(id) {
         this.searchProductById(id);
         cy.getByDataCy(`${this.productAddToCartButton}${id}`).click();
         cy.getByDataCy('closeModal').should('be.visible').click();
     }
 
-
+    goToShoppingCart() {
+        cy.getByDataCy(this.goShoppingCartButton).click();
+    }
 
 }

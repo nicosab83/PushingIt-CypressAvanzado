@@ -8,7 +8,7 @@ export class NewProductPage {
         this.closeModal = 'closeModal';
     }
 
-    newProductFillForm(name, price, img, id){
+    newProductFillForm(name, price, img, id) {
         cy.getByDataCy(this.productNameInput).type(name);
         cy.getByDataCy(this.productPriceInput).type(price);
         cy.getByDataCy(this.productCardInput).type(img);
