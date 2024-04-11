@@ -9,9 +9,7 @@ export class ProductSearchResultPage {
         this.productDeleteButton = 'delete-';
         this.productAddToCartButton = 'add-to-cart-';
         this.goShoppingCartButton = 'goShoppingCart';
-        //this.goCheckoutButton = 'goCheckout';
         this.goBillingSummaryButton = 'goBillingSummary';
-        //this.showTotalPriceButtonText = 'Show total price';
     }
 
     searchProductById(id) {

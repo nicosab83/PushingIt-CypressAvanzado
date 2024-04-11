@@ -8,11 +8,11 @@ export class OnlineShopBillingSummaryPage {
         this.goCheckoutButton = 'goCheckout';
     }
 
-    getBillingSummaryTable(){
+    getBillingSummaryTable() {
         return cy.get(this.summaryTable);
     }
 
-    goCheckout(){
+    goCheckout() {
         cy.getByDataCy(this.goCheckoutButton).click();
     }
 

@@ -16,11 +16,11 @@ export class OnlineShopCheckoutPage {
         cy.getByDataCy(this.purchaseButton).click();
     }
 
-    closePurchaseModal(){
+    closePurchaseModal() {
         cy.getByDataCy(this.thankYouButton).click();
     }
 
-    getPurchaseId(){
+    getPurchaseId() {
         return cy.getByDataCy(this.sellIdTxt);
     }
 

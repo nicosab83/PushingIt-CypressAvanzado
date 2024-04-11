@@ -10,9 +10,6 @@ export class OnlineShopPage {
         this.productDeleteButton = 'delete-';
         this.productAddToCartButton = 'add-to-cart-';
         this.goShoppingCartButton = 'goShoppingCart';
-        //this.goCheckoutButton = 'goCheckout';
-        //this.goBillingSummaryButton = 'goBillingSummary';
-        //this.showTotalPriceButtonText = 'Show total price';
     }
 
     searchProductById(id) {
@@ -31,15 +28,19 @@ export class OnlineShopPage {
         this.addProductToCart(id);
     }
 
+    searchAndAddProductToCart(id, times) {
+        this.searchProductById(id);
+        cy.log(`se usa el metodo x units`)
+        var x;
+        for (x = 0; x < times; x++) {
+            cy.log(`Producto agregado ${x} veces`)
+            this.addProductToCart(id);
+        }
+    }
+
     deleteProduct(id) {
         cy.getByDataCy(`${this.productDeleteButton}${id}`).click();
         cy.get('#saveEdit').should('be.visible').click();
-        cy.getByDataCy('closeModal').should('be.visible').click();
-    }
-
-    searchAndAddProductToCart(id) {
-        this.searchProductById(id);
-        cy.getByDataCy(`${this.productAddToCartButton}${id}`).click();
         cy.getByDataCy('closeModal').should('be.visible').click();
     }
 
